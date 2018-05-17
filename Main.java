@@ -1,13 +1,18 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     private final Scanner in = new Scanner(System.in);
-    private final Map<Candidate, List<Voter>> map = new HashMap<>();
+    private final Map<Candidate, List<Voter>> map = buildMap();
     private VoterUiHandler voterUiHandler = new VoterUiHandler(map);
     private StatisticsUiHandler statisticsUiHandler = new StatisticsUiHandler(map);
+
+    private Map<Candidate, List<Voter>> buildMap() {
+        Map<Candidate, List<Voter>> result = new HashMap<>();
+        for (Candidate candidate : Candidate.values()) {
+            result.put(candidate, new ArrayList<>());
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         new Main().start();
@@ -15,6 +20,7 @@ public class Main {
 
     private void start() {
         while (true) {
+
             showMenu();
             switch (in.nextInt()) {
                 case 1:
